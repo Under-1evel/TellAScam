@@ -216,3 +216,27 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# ==========================
+# TellAScam project files
+# ==========================
+
+# Raw and processed datasets
+data/raw/*
+data/processed/*
+
+# Keep directory structure in Git
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+
+# Trained model artifacts
+models/*
+!models/.gitkeep
+
+# Local secrets
+.env
+.env.*
+
+# OS files
+.DS_Store
+Thumbs.db

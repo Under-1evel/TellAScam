@@ -1,0 +1,48 @@
+# TellAScam Baseline Results
+
+## Dataset
+
+UCI SMS Spam Collection
+
+After preprocessing:
+- 5,169 unique messages
+- Exact duplicates removed before splitting
+- No missing values
+- No conflicting labels
+
+## Split
+
+Stratified 80/20 train-test split.
+
+- Training samples: 4,135
+- Testing samples: 1,034
+
+## Model
+
+TF-IDF Vectorizer + Logistic Regression
+
+## Results
+
+| Metric | Ham | Spam |
+|---|---:|---:|
+| Precision | 0.96 | 0.96 |
+| Recall | 1.00 | 0.75 |
+| F1 | 0.98 | 0.84 |
+
+Overall accuracy: 0.9642
+
+## Confusion Matrix
+
+| | Predicted Ham | Predicted Spam |
+|---|---:|---:|
+| Actual Ham | 899 | 4 |
+| Actual Spam | 33 | 98 |
+
+## Initial Observation
+
+The baseline achieves high overall accuracy and high spam precision,
+but spam recall is considerably lower. The classifier correctly
+identifies 98 of 131 spam messages while missing 33.
+
+Future experiments should investigate whether spam recall can be
+improved without causing an excessive increase in false positives.
