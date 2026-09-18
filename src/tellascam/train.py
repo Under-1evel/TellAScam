@@ -56,7 +56,5 @@ if __name__ == "__main__":
 
     predictions = model.predict(X_test)
 
-    print("\nFirst 10 predictions:")
-    print(predictions[:10])
-
+    print("\nMODEL PERFORMANCE")
     evaluate_model(y_test, predictions)
