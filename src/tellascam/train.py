@@ -22,8 +22,10 @@ def split_data():
 
     return X_train, X_test, y_train, y_test
 
-def build_model() -> Pipeline:
-    """Build the baseline TF-IDF + Logistic Regression model."""
+def build_model(balanced=False) -> Pipeline:
+    """Build a TF-IDF + Logistic Regression model."""
+
+    class_weight = "balanced" if balanced else None
 
     model = Pipeline([
         (
@@ -34,7 +36,8 @@ def build_model() -> Pipeline:
             "classifier",
             LogisticRegression(
                 max_iter=1000,
-                random_state=42
+                random_state=42,
+                class_weight=class_weight
             )
         )
     ])
@@ -47,14 +50,24 @@ if __name__ == "__main__":
     print(f"Training samples: {len(X_train)}")
     print(f"Testing samples:  {len(X_test)}")
 
-    model = build_model()
+    # Experiment 1: Original baseline
+    baseline_model = build_model(balanced=False)
 
     print("\nTraining baseline model...")
-    model.fit(X_train, y_train)
+    baseline_model.fit(X_train, y_train)
 
-    print("Training complete.")
+    baseline_predictions = baseline_model.predict(X_test)
 
-    predictions = model.predict(X_test)
+    print("\nBASELINE MODEL")
+    evaluate_model(y_test, baseline_predictions)
 
-    print("\nMODEL PERFORMANCE")
-    evaluate_model(y_test, predictions)
+    # Experiment 2: Balanced class weights
+    balanced_model = build_model(balanced=True)
+
+    print("\nTraining balanced model...")
+    balanced_model.fit(X_train, y_train)
+
+    balanced_predictions = balanced_model.predict(X_test)
+
+    print("\nBALANCED MODEL")
+    evaluate_model(y_test, balanced_predictions)
