@@ -3,7 +3,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
 from sklearn.pipeline import Pipeline
 
-from evaluate import evaluate_model
+from evaluate import evaluate_model, analyze_errors
 from preprocessing import load_data
 
 def split_data():
@@ -71,3 +71,10 @@ if __name__ == "__main__":
 
     print("\nBALANCED MODEL")
     evaluate_model(y_test, balanced_predictions)
+
+    print("\nBALANCED MODEL ERROR ANALYSIS")
+    analyze_errors(
+    X_test,
+    y_test,
+    balanced_predictions
+    )

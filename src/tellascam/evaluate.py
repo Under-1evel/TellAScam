@@ -1,3 +1,4 @@
+import pandas as pd
 from sklearn.metrics import (
     accuracy_score,
     precision_score,
@@ -5,7 +6,6 @@ from sklearn.metrics import (
     f1_score,
     confusion_matrix,
 )
-
 
 def evaluate_model(y_true, y_pred):
     """Evaluate classification performance."""
@@ -43,3 +43,35 @@ def evaluate_model(y_true, y_pred):
 
     print("\nConfusion Matrix:")
     print(matrix)
+
+
+def analyze_errors(X_test, y_true, y_pred):
+    """Display false positives and false negatives."""
+
+    results = pd.DataFrame({
+        "message": X_test.values,
+        "actual": y_true.values,
+        "predicted": y_pred
+    })
+
+    false_positives = results[
+        (results["actual"] == "ham") &
+        (results["predicted"] == "spam")
+    ]
+
+    false_negatives = results[
+        (results["actual"] == "spam") &
+        (results["predicted"] == "ham")
+    ]
+
+    print("\nFALSE POSITIVES")
+    print(f"Count: {len(false_positives)}")
+
+    for message in false_positives["message"]:
+        print(f"- {message}")
+
+    print("\nFALSE NEGATIVES")
+    print(f"Count: {len(false_negatives)}")
+
+    for message in false_negatives["message"]:
+        print(f"- {message}")
