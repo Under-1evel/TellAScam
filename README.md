@@ -49,7 +49,7 @@ Training and inference are kept separate. The model is trained offline and seria
 
 ### Dataset
 
-The initial model uses the UCI SMS Spam Collection, containing 5,572 labeled SMS messages.
+The initial model uses the UCI SMS Spam Collection, containing 5,572 labeled SMS messages. The dataset is provided by the UCI Machine Learning Repository and is licensed under CC BY 4.0, which is not included in the repository and must downloaded separately.
 
 During exploratory data analysis:
 
