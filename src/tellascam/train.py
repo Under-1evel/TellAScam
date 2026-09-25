@@ -11,8 +11,8 @@ from sklearn.model_selection import (
     cross_validate,
 )
 
-from evaluate import evaluate_model, analyze_errors
-from preprocessing import load_data
+from .preprocessing import load_data
+from .evaluate import evaluate_model, analyze_errors
 
 MODEL_PATH = Path("models/tellascam_model.joblib")
 
